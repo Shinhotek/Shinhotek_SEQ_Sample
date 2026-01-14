@@ -62,7 +62,7 @@
 1. `CmdGetInfomation()`
 2. `Version`, `CamID`, `CamWidth/CamHeight`, `Exposure` 등 출력
 
-### [3/7] Config 로드(선택)
+### [3/7] Config 로드 (선택 사항)
 1. 인자 `--conf/-c`가 있으면 `LoadConfigFile(path)` 수행
 
 ### [4/7] 평가 항목 선정 + Continuous 설정
@@ -137,3 +137,4 @@
 
 ## 라이선스
 원본 라이브러리 / 프로젝트의 라이선스를 따릅니다. (상세는 원본 저장소 참고)
+
