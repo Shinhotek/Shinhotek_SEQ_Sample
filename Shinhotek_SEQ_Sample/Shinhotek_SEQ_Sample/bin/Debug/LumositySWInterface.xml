@@ -1,0 +1,809 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LumositySWInterface</name>
+    </assembly>
+    <members>
+        <member name="T:LumosityXMLInterface.XMLInterface">
+            <summary>
+            Lumosity의 통신 XML interface의 기능을 수행할 수 있는 Class
+            </summary>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.EvaluationDataSet">
+            <summary>
+            Frame의 측정 항목들의 Data를 표현하는 데이터 구조
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.EvaluationDataSet.val">
+            <summary>
+            Evaluation 항목 Index name
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.EvaluationDataSet.unit">
+            <summary>
+            Evaluation 항목 단위
+            </summary>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.EvaluationDataSet.#ctor(System.String,System.String)">
+            <summary>
+            Frame Evaluation Data set 생성자
+            </summary>
+            <param name="evalVal">Evaluation 항목 Index name</param>
+            <param name="evalUnit">Evaluation 항목 단위</param>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.GrabMode">
+            <summary>
+            Main control Mode 항목
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.GrabMode.Continuous">
+            <summary>
+            현재 Frame rate의 최대 성능으로 계속적으로 Capture
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.GrabMode.SnapShot">
+            <summary>
+            하나의 Frame만 Capture
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.GrabMode.ExternalTriggered">
+            <summary>
+            외부 Trigger를 이용한 Capture
+            </summary>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.FrameROIMode">
+            <summary>
+            Viewer의 ROI Mode
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.FrameROIMode.MANUAL">
+            <summary>
+            수동으로 Viewer에서 Size 및 위치 마우스로 조절
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.FrameROIMode.CENTROID">
+            <summary>
+            위치는 자동으로 이동, 수동으로 Size 조절
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.FrameROIMode.AUTORESIZE">
+            <summary>
+            자동으로 위치 및 Size 조절
+            </summary>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.FrameROIShape">
+            <summary>
+            Viewer 의 ROI 모양
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.FrameROIShape.RECTANGLE">
+            <summary>
+            ROI 사각모양
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.FrameROIShape.CIRCLE">
+            <summary>
+            ROI 원형모양
+            </summary>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.FrameSectionBorderMode">
+            <summary>
+            Sections border Mode
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.FrameSectionBorderMode.MANUAL">
+            <summary>
+            Border를 마우스를 이용하여 수동으로 이동 가능
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.FrameSectionBorderMode.REFERENCE">
+            <summary>
+            Border의 Percentage of reference 값을 기준으로 자동으로 Border 이동
+            </summary>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.ModeAutoControl">
+            <summary>
+            Camera의 자동조절 mode
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.ModeAutoControl.AutoOff">
+            <summary>
+            모든 Camera property를 수동으로 조절
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.ModeAutoControl.AutoExposure">
+            <summary>
+            Camera의 Exposure time을 자동으로 조절
+            </summary>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.ModeBackgroundImageCorrection">
+            <summary>
+            Background correction mode
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.ModeBackgroundImageCorrection.IMAGE">
+            <summary>
+            Background image기반 노이즈 제거 모드
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.ModeBackgroundImageCorrection.CORNER">
+            <summary>
+            Corner 4부분의 영역의 Intensity를 노이즈로 기준하여 노이즈 제거 모드
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.ModeBackgroundImageCorrection.CONSTANT">
+            <summary>
+            상수를 설정하여 노이즈를 상수 값만큼 제거하는 모드
+            </summary>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.GetFrameFormat">
+            <summary>
+            Frame image format
+            </summary>
+        </member>
+        <member name="T:LumosityXMLInterface.XMLInterface.BlurMode">
+            <summary>
+            Image process blur 처리 Mode 항목
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.BlurMode.AVERAGE">
+            <summary>
+            정규화된 필터를 사용하여 이미지를 부드럽게 만듭니다.
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.BlurMode.GAUSSIAN">
+            <summary>
+            가우시안 필터를 사용하여 이미지를 흐리게 처리합니다.
+            </summary>
+        </member>
+        <member name="F:LumosityXMLInterface.XMLInterface.BlurMode.MEDIAN">
+            <summary>
+            중앙값 필터를 사용하여 이미지를 부드럽게 만듭니다.
+            </summary>
+        </member>
+        <member name="E:LumosityXMLInterface.XMLInterface.FrameEvaluations">
+            <summary>
+            Frame의 측정 항목의 결과에 대한 Event
+            </summary>
+        </member>
+        <member name="E:LumosityXMLInterface.XMLInterface.Disconnected">
+            <summary>
+            Socket의 연결이 끊어짐에 대한 Event
+            </summary>
+        </member>
+        <member name="E:LumosityXMLInterface.XMLInterface.ErrorOccurred">
+            <summary>
+            Error 발생에 대한 Event
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.AvailableEvaluations">
+            <summary>
+            사용 가능한 Evaluation 항목
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.UseEvaluations">
+            <summary>
+            사용중인 Evaluation의 항목
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.IsConnected">
+            <summary>
+            Lumosity와 Socket연결/연결끊김 상태
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.ConnectionStatus">
+            <summary>
+            Lumosity와 Socket연결 상세 상태
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.SocketTimeOut">
+            <summary>
+            Lumosity 와 연결 중 Data 지연 Timeout 
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.Version">
+            <summary>
+            연결된 Lumosity의 버전
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.GrabModeType">
+            <summary>
+            Main control의 Type mode
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FloatingAverageEnable">
+            <summary>
+            Main control의 Image process에서 Float average 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FloatingAverageValue">
+            <summary>
+            Main control의 Image process에서 Float average Frame 수 
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FloatingAverageValueMax">
+            <summary>
+            Main control의 Image process에서 Float average Frame 최대 설정가능 수
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.NumberRestrictionEnable">
+            <summary>
+            Main control의 Image process에서 Number restriction 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.NumberRestrictionValue">
+            <summary>
+            Main control의 Image process에서 Number restriction Frame 수 
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.NumberRestrictionValueMax">
+            <summary>
+            Main control의 Image process에서 Number restriction 최대 설정가능 수 
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BlurEnable">
+            <summary>
+            Main control의 Image process에서 Blur 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BlurKernelValue">
+            <summary>
+            Main control의 Image process에서 Blur의 Kernel 수 
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BlurModeType">
+            <summary>
+            Main control의 Image process에서 Blur의 Mode
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BlurKernelValueMax">
+            <summary>
+            Main control의 Image process에서 Blur의 Kernel 최대 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamID">
+            <summary>
+            연결된 Lumosity Beam profiler의 카메라 ID
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamOffsetX">
+            <summary>
+            Camera offset X
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamOffsetY">
+            <summary>
+            Camera offset Y
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamWidth">
+            <summary>
+            Camera Width
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamHeight">
+            <summary>
+            Camera Height
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamWidthMax">
+            <summary>
+            Camera Width 최대 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamHeightMax">
+            <summary>
+            Camera Height 최대 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamWidthStep">
+            <summary>
+            Camera Width step
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamHeightStep">
+            <summary>
+            Camera Height step
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamDepth">
+            <summary>
+            Camera intensity depth (camera bit수에 따른 밝기강도의 해상도 깊이)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamPixelSizeWidth">
+            <summary>
+            Camera Width Pixel size
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamPixelSizeHeight">
+            <summary>
+            Camera Height Pixel size
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamAvailableGain">
+            <summary>
+            Camera Gain 조절가능 여부
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamGainMax">
+            <summary>
+            Camera Gain 최대 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamGainMin">
+            <summary>
+            Camera Gain 최소 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamGain">
+            <summary>
+            Camera Gain
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamExposureTimeMax">
+            <summary>
+            Camera Exposure time 최대 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamExposureTimeMin">
+            <summary>
+            Camera Exposure time 최소 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamExposureTime">
+            <summary>
+            Camera Exposure time
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamTriggerDelayMax">
+            <summary>
+            Camera Trigger delay 최대 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamTriggerDelayMin">
+            <summary>
+            Camera Trigger delay 최소 설정가능 값
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamTriggerDelay">
+            <summary>
+            Camera Trigger delay
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.CamAutoControl">
+            <summary>
+            Camera auto control mode
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.IsEvaluationContinuous">
+            <summary>
+            Evaluation Frame capture마다 값을 받아올지 여부
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationInterval">
+            <summary>
+            Evaluation interval 설정
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.IsReprocessFrame">
+            <summary>
+            Evaluation Frame Reprocess 할지 여부
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameROIActive">
+            <summary>
+            Frame ROI 기능 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameRoiMode">
+            <summary>
+            Viewer의 Frame ROI mode 설정
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameRoiShape">
+            <summary>
+            Viewer의 Frame ROI shape
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameROILeft">
+            <summary>
+            Viewer의 Frame ROI 의 Left 위치 이동 (단위:Pixel)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameROITop">
+            <summary>
+            Viewer의 Frame ROI 의 Top 위치 이동 (단위:Pixel)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameROIWidth">
+            <summary>
+            Viewer의 Frame ROI 의 넓이 (단위:Pixel)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameROIHeight">
+            <summary>
+            Viewer의 Frame ROI 의 높이 (단위:Pixel)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionActive">
+            <summary>
+            Viewer의 Cross section 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionRow">
+            <summary>
+            Viewer의 Cross section의 수평(Horizontal) 이동
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionCol">
+            <summary>
+            Viewer의 Cross section의 수직(Vertical) 이동
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionAuto">
+            <summary>
+            Viewer의 Cross section의 자동 추적 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionActive">
+            <summary>
+            Viewer의 Beam section 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionRow">
+            <summary>
+            Viewer의 Beam section의 장축(Long axis) 이동
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionCol">
+            <summary>
+            Viewer의 Beam section의 단축(Short axis) 이동
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionAuto">
+            <summary>
+            Viewer의 Beam section의 자동 추적 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionAngle">
+            <summary>
+            Viewer의 Beam section의 각도 조절
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionHorizontalBorderType">
+            <summary>
+            Cross section Horizontal Border mode
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionHorizontalReference">
+            <summary>
+            Cross section Horizontal Border percentage of Ref.
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionHorizontalOffset">
+            <summary>
+            Cross section Horizontal Border Percentage offset
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionHorizontalLeft">
+            <summary>
+            Cross section Horizontal Border Left
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionHorizontalRight">
+            <summary>
+            Cross section Horizontal Border Right
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionVerticalBorderType">
+            <summary>
+            Cross section Vertical Border mode
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionVerticalReference">
+            <summary>
+            Cross section Vertical Border percentage of Ref.
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionVerticalOffset">
+            <summary>
+            Cross section Vertical Border Percentage offset
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionVerticalLeft">
+            <summary>
+            Cross section Vertical Border Left
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameCrossSectionVerticalRight">
+            <summary>
+            Cross section Vertical Border Right
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionLongBorderType">
+            <summary>
+            Beam section Long axis Border mode
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionLongReference">
+            <summary>
+            Beam section Long axis Border percentage of Ref.
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionLongOffset">
+            <summary>
+            Beam section Long axis Border Percentage offset
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionLongLeft">
+            <summary>
+            Beam section Long axis Border Left
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionLongRight">
+            <summary>
+            Beam section Long axis Border Right
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionShortBorderType">
+            <summary>
+            Beam section Short axis Border mode
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionShortReference">
+            <summary>
+            Beam section Short axis Border percentage of Ref.
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionShortOffset">
+            <summary>
+            Beam section Short axis Border percentage Offset.
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionShortLeft">
+            <summary>
+            Beam section Short axis Border left.
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.FrameBeamSectionShortRight">
+            <summary>
+            Beam section Short axis Border right.
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BackgourndMode">
+            <summary>
+            Image correction의 Mode
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BackgroundImageEnable">
+            <summary>
+            Image correction 활성/비활성화
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BackgroundAcquireFrames">
+            <summary>
+            Image correction의 Background mode의 Acquire할 이미지 Frame 수
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BackgroundCornerEnable">
+            <summary>
+            Image correction의 Corner mode의 활성/비활성화
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BackgroundCornerSpan">
+            <summary>
+            Image correction의 Corner mode의 Span
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BackgroundCornerOverlay">
+            <summary>
+            Image correction의 Corner mode에서 Viewer에 표시 여부
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BackgroundContantEnable">
+            <summary>
+            Image correction의 Constant 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.BackgroundConstantValue">
+            <summary>
+            Image correction의 Constant 값 (Intensity)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameActive">
+            <summary>
+            Frame 취득 시 Viewer의 컬러 이미지 취득 활성/비활성
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameScale">
+            <summary>
+            Frame 취득시 가져올 컬러 이미지의 Scale 설정 (성능의 영향을 줄 수 있음)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameFormat">
+            <summary>
+            Frame 취득시 가져올 컬러 이미지의 Format(BMP, JPG, PNG)  설정
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameSucceeded">
+            <summary>
+            취득된 Frame 이미지의 성공 여부 확인
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameBitmapWidth">
+            <summary>
+            취득된 Frame 이미지의 Width
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameBitmapHeight">
+            <summary>
+            취득된 Frame 이미지의 Height
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameBitmap">
+            <summary>
+            취득된 Frame 이미지의 Bitmap data
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameTifRawData">
+            <summary>
+            취득된 Frame 이미지의 Tif Raw data
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameBitDepth">
+            <summary>
+            취득된 Frame 이미지의 Bit Depth (-1:not invalidate, 8, 16, 24)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.EvaluationGetFrameIsColor">
+            <summary>
+            취득된 Frame 이미지가 컬러인지 여부 (true: 컬러, false: 흑백)
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.ErrorDetail">
+            <summary>
+            연결된 Lumosity Beam profiler interface Error 내용
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.LoadedImagePath">
+            <summary>
+            Load image 프로토콜 Command의 Load한 이미지파일 경로
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.SavedImagePath">
+            <summary>
+            Save image 프로토콜 Command의 Save한 이미지파일 경로
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.LoadedConfPath">
+            <summary>
+            Save image 프로토콜 Command의 Save한 이미지파일 경로
+            </summary>
+        </member>
+        <member name="P:LumosityXMLInterface.XMLInterface.SavedConfPath">
+            <summary>
+            Save image 프로토콜 Command의 Save한 이미지파일 경로
+            </summary>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.#ctor">
+            <summary>
+            XMLInterface 생성자
+            </summary>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.Connect(System.String,System.Int32,System.Int32)">
+            <summary>
+            클라이언트 연결기능으로 Lumosity를 서버로 구동하여 연결한다.
+            </summary>
+            <param name="ip">Lumosity의 IP</param>
+            <param name="port">Lumosity 서버 포트</param>
+            <param name="timeout">연결 및 데이터 통신시 timeout 설정</param>
+            <returns>연결 성공여부</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.Disconnect">
+            <summary>
+            Lumosity와의 연결을 끊는다.
+            </summary>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.CmdGetInfomation">
+            <summary>
+            연결된 Lumosity의 전체 정보(info tag)를 가져온다.
+            </summary>
+            <returns>Command info의 정상적인 Data send/recieve 성공여부</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.Start">
+            <summary>
+            카메라 Capture(Grab) 하여 Beam profiler의 측정 구동을 시작
+            </summary>
+            <returns>Start 명령의 정상 동작 여부</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.Stop">
+            <summary>
+            카메라 Capture(Grab) 중지 하여 Beam profiler의 측정 구동을 멈춤
+            </summary>
+            <returns>Stop 명령의 정상 동작 여부</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.StartBackground">
+            <summary>
+            Image correction의 background mode에 필요한 Image acquire
+            </summary>
+            <returns>StartBackground 명령의 정상 동작 여부</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.AddUseEvaluation(System.String)">
+            <summary>
+            AvailableEvaluations(사용가능 Eavaluation) 항목에서 필요한 항목을 사용항목으로 추가
+            </summary>
+            <param name="evaluationName">사용 가능 Evaluation 항목 이름</param>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.RemoveUseEvaluation(System.String)">
+            <summary>
+            UseEvaluations(사용중인 Evaluation) 항목에서 제거할 항목 지정하여 사용항목에서 제거
+            </summary>
+            <param name="evaluationName">사용중인 Evaluation에서 제거할 항목 이름</param>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.ClearUseEvaluations">
+            <summary>
+            사용중인 Evaluation 모두 제거
+            </summary>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.GetEvaluationDescription(System.String)">
+            <summary>
+            AvailableEvaluations(사용가능 Eavaluation)의 설명을 가져옴
+            </summary>
+            <param name="evaluationName">사용 가능 Evaluation 항목 이름</param>
+            <returns>해당 Evaluation의 설명</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.GetEvaluationResult(System.String)">
+            <summary>
+            UseEvaluations(사용중인 Evaluation) 사용되고 있는 Evaluation중 EvaluationDataSet구조의 결과값을 가져옴
+            </summary>
+            <param name="evaluationName">사용중인 Evaluation의 이름중에서 항목이름</param>
+            <returns>evaluationName 에 대한 EvaluationDataSet 결과</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.LoadImageTif(System.String)">
+            <summary>
+            Lumosity Viewer에서 Load tif 기능
+            </summary>
+            <param name="filename">Load 할 tif 파일 명 (원격PC일 경우 Local과 다른 경로이므로 공용서버의 경로로 설정)</param>
+            <returns>true일 경우 Viewer에서 Load TIF가 성공</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.SaveImageTif(System.String)">
+            <summary>
+            Lumosity Viewer에서 Save tif 기능
+            </summary>
+            <param name="filename">Save 할 tif 파일 명 (원격PC일 경우 Local과 다른 경로이므로 공용서버의 경로로 설정)</param>
+            <returns>true일 경우 Viewer에서 Save TIF가 성공</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.CrossSectionPositionCenter">
+            <summary>
+            Lumosity Viewer에서 Cross section의 Position을 Center로 이동
+            </summary>
+            <returns>Command 전송 성공 여부</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.BeamSectionPositionCenter">
+            <summary>
+            Lumosity Viewer에서 Beam section의 Position을 Center로 이동
+            </summary>
+            <returns>Command 전송 성공 여부</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.ExitProgram">
+            <summary>
+            Lumosity 프로그램을 종료
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.LoadConfigFile(System.String)">
+            <summary>
+            Loads the configuration file.
+            </summary>
+            <param name="filename">The configuration data in XML format.</param>
+            <returns>True if the configuration was loaded successfully, otherwise false.</returns>
+        </member>
+        <member name="M:LumosityXMLInterface.XMLInterface.SaveConfigFile(System.String)">
+            <summary>
+            Saves the configuration file.
+            </summary>
+            <param name="filename">The configuration data in XML format.</param>
+        </member>
+    </members>
+</doc>

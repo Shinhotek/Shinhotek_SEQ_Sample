@@ -1,0 +1,10 @@
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\bin\Debug\DIT_SEQ_TEST.exe.config
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\bin\Debug\DIT_SEQ_TEST.exe
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\bin\Debug\DIT_SEQ_TEST.pdb
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\bin\Debug\LumositySWInterface.pdb
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\bin\Debug\LumositySWInterface.xml
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\obj\Debug\Shinhotek_SEQ_Sample.csproj.AssemblyReference.cache
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\obj\Debug\Shinhotek_SEQ_Sample.csproj.CoreCompileInputs.cache
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\obj\Debug\Shinhote.1E34FECA.Up2Date
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\obj\Debug\DIT_SEQ_TEST.exe
+C:\Users\happybono\Documents\KakaoTalk Downloads\DIT_SEQ_TEST_SAMPLE\DIT_SEQ_TEST\DIT_SEQ_TEST\obj\Debug\DIT_SEQ_TEST.pdb
