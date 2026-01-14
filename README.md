@@ -1,4 +1,4 @@
-﻿# Shinhotek_SEQ_Sample
+# Shinhotek_SEQ_Sample
 
 `Shinhotek_SEQ_Sample` 는 **[Shinhotek/LumositySWInterface](https://github.com/Shinhotek/LumositySWInterface)** 의 `XMLInterface` 를 사용할 때,
 현장에서 문제가 자주 발생하는 "타이밍 / 프레임 동기화 / 설정 반영 순서" 를 피하고 **안정적으로 동작하는 호출 Sequence (모범 사용 순서)** 를 보여주는 샘플 콘솔 앱입니다.
@@ -20,7 +20,7 @@
 ## 실행 방법
 
 ### 1) 기본 실행
-- `Shinhotek_SEQ_Sample` 실행 시, 샘플은 무한 루프(`while(true)`) 형태로 아래 전체 순서 (Sequence) 를 반복 수행합니다.
+- `Shinhotek_SEQ_Sample` 실행 시, 샘플은 무한 루프 (`while(true)`) 형태로 아래 전체 순서 (Sequence) 를 반복 수행합니다.
 
 ### 2) Config 파일 적용 (선택)
 샘플은 실행 인자로 Config를 주면 `LoadConfigFile`을 수행합니다.
@@ -32,10 +32,10 @@
 
 ---
 
-## 이벤트 기반 동기화 설계(중요)
+## 이벤트 기반 동기화 설계 (중요)
 
 샘플은 `XMLInterface.FrameEvaluations` 이벤트를 통해 최신 프레임 도착을 감지하고,
-`AutoResetEvent`(`_frameArrived`)로 **동기화(대기/타임아웃)** 를 구현합니다.
+`AutoResetEvent`(`_frameArrived`)로 **동기화 (대기 / 타임아웃)** 를 구현합니다.
 
 - 이벤트 핸들러: `OnFrameEvaluations`
 - 대기 함수: `WaitFrameArrived(title, timeoutMs)`
@@ -47,7 +47,7 @@
 
 ---
 
-## 권장 안정 시퀀스(Program.cs 흐름 요약)
+## 권장 안정 시퀀스 (Program.cs 흐름 요약)
 
 샘플의 전체 흐름은 `Program.Main`을 그대로 따라가면 됩니다.
 
@@ -75,24 +75,24 @@
    - `NumberRestrictionValue = _frameCount`
    - `IsEvaluationContinuous = true`
 
-### [5/7] Start + 초기 프레임 수신(워밍업)
+### [5/7] Start + 초기 프레임 수신 (워밍업)
 1. `Start()` 호출
 2. `_currframeNumber`가 `_frameCount`에 도달할 때까지 대기 (안전장치 타임아웃 포함)
 3. `Stop()` 호출
 
 이 단계는 **"초기 안정화"** 목적이며, 이후 단계에서 설정 반영 / 결과 읽기가 보다 안정적입니다.
 
-### 이미지 저장(대표적인 안전 패턴)
+### 이미지 저장 (대표적인 안전 패턴)
 1. `WaitFrameArrived("이미지 저장 전 최신 프레임 대기", 3000)`
 2. `SaveImageTif(path)`
 
-### Evaluation 결과 읽기(대표적인 안전 패턴)
+### Evaluation 결과 읽기 (대표적인 안전 패턴)
 - **반드시** 프레임 도착을 보장한 뒤 `GetEvaluationResult(key)` 호출
 - 예: Beam size
   - `FRAME_BEAMWIDTH_LONG`
   - `FRAME_BEAMWIDTH_SHORT`
 
-### Steepness 측정(크로스 섹션 위치를 바꾸며 반복 측정)
+### Steepness 측정 (크로스 섹션 위치를 바꾸며 반복 측정)
 - 공통 패턴:
   1. 크로스 섹션 설정 변경 (`FrameCrossSectionRow/Col`)
   2. `WaitFrameArrived("... 결과 대기", 3000)`
@@ -100,9 +100,9 @@
 
 샘플은 20 × 20mm 영역에서 5 개 지점을 측정하는 예를 제공합니다.
 
-### Uniformity ROI 측정(ROI 설정 후 결과 읽기)
+### Uniformity ROI 측정 (ROI 설정 후 결과 읽기)
 - 공통 패턴:
-  1. ROI/Blur 설정 변경
+  1. ROI / Blur 설정 변경
      - `BlurEnable = true`, `BlurKernelValue = 3`
      - `FrameROILeft/Top/Width/Height`, `FrameROIActive = true`
   2. `WaitFrameArrived("Uniformity 결과 대기", 3000)`
@@ -130,11 +130,10 @@
 
 ## 관련 프로젝트
 
-- Lumosity XML 인터페이스 라이브러리/예제:
+- Lumosity XML 인터페이스 라이브러리 / 예제:
   - https://github.com/Shinhotek/LumositySWInterface
 
 ---
 
 ## 라이선스
-
-원본 라이브러리/프로젝트의 라이선스를 따릅니다. (상세는 원본 저장소 참고)
+원본 라이브러리 / 프로젝트의 라이선스를 따릅니다. (상세는 원본 저장소 참고)
