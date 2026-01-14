@@ -1,6 +1,6 @@
 # Shinhotek_SEQ_Sample
 
-`Shinhotek_SEQ_Sample` 는 **[Shinhotek/LumositySWInterface](https://github.com/Shinhotek/LumositySWInterface)** 의 `XMLInterface` 를 사용할 때,
+`Shinhotek_SEQ_Sample` 은 **[Shinhotek/LumositySWInterface](https://github.com/Shinhotek/LumositySWInterface)** 의 `XMLInterface` 를 사용할 때,
 현장에서 문제가 자주 발생하는 "타이밍 / 프레임 동기화 / 설정 반영 순서" 를 피하고 **안정적으로 동작하는 호출 Sequence (모범 사용 순서)** 를 보여주는 샘플 콘솔 앱입니다.
 
 핵심은 아래 패턴입니다.
@@ -137,4 +137,5 @@
 
 ## 라이선스
 원본 라이브러리 / 프로젝트의 라이선스를 따릅니다. (상세는 원본 저장소 참고)
+
 
