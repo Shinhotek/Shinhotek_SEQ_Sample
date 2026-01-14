@@ -1,4 +1,4 @@
-# Shinhotek_SEQ_Sample
+﻿# Shinhotek_SEQ_Sample
 
 `Shinhotek_SEQ_Sample` 는 **[Shinhotek/LumositySWInterface](https://github.com/Shinhotek/LumositySWInterface)** 의 `XMLInterface` 를 사용할 때,
 현장에서 문제가 자주 발생하는 "타이밍 / 프레임 동기화 / 설정 반영 순서" 를 피하고 **안정적으로 동작하는 호출 Sequence (모범 사용 순서)** 를 보여주는 샘플 콘솔 앱입니다.
@@ -102,7 +102,7 @@
 
 ### Uniformity ROI 측정(ROI 설정 후 결과 읽기)
 - 공통 패턴:
-  1. ROI / Blur 설정 변경
+  1. ROI/Blur 설정 변경
      - `BlurEnable = true`, `BlurKernelValue = 3`
      - `FrameROILeft/Top/Width/Height`, `FrameROIActive = true`
   2. `WaitFrameArrived("Uniformity 결과 대기", 3000)`
@@ -130,12 +130,11 @@
 
 ## 관련 프로젝트
 
-- Lumosity XML 인터페이스 라이브러리 / 예제:
+- Lumosity XML 인터페이스 라이브러리/예제:
   - https://github.com/Shinhotek/LumositySWInterface
 
 ---
 
 ## 라이선스
 
-
-원본 라이브러리 / 프로젝트의 라이선스를 따릅니다. (상세는 원본 저장소 참고)
+원본 라이브러리/프로젝트의 라이선스를 따릅니다. (상세는 원본 저장소 참고)
